@@ -3,27 +3,32 @@
 
 # class to setup basic motd, include on all nodes
 class motd {
-  include motd::params
   include concat::setup
 
-  $motd = $motd::params::motd
-
-  concat{ $motd:
-     owner   => root,
-     mode    => 644
+  concat{ '/etc/motd':
+    owner => 'root',
+    mode  => '0644',
   }
 
-  concat::fragment{"motd_header":
-     target  => $motd,
-     content => template( 'motd/motd.erb' ),
-     order   => 02,
+  concat::fragment{ 'motd_header':
+    target  => '/etc/motd',
+    content => template( 'motd/motd.erb' ),
+    order   => 02,
   }
 
   # local users on the machine can append to motd by just creating
   # /etc/motd.local
-  concat::fragment{"motd_local":
-     target  => $motd,
-     ensure  => "/etc/motd.local",
-     order   => 15
+  concat::fragment{ 'motd_local':
+    ensure  => '/etc/motd.local',
+    target  => '/etc/motd',
+    order   => 15,
+  }
+
+  # Place our custom /etc/issue
+  file { '/etc/banner':
+    ensure => 'present',
+    source => 'puppet:///modules/motd/banner.txt',
+    owner  => 'root',
+    mode   => '0644',
   }
 }

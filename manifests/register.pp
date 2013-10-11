@@ -1,17 +1,16 @@
 # used by other modules to register themselves in the motd
-define motd::register($content="", $order=10) {
+define motd::register($content=undef, $order=10) {
   include motd
-  include motd::params
 
-  if $content == "" {
-     $body = $name
+  if $content == undef {
+    $body = $name
   } else {
-     $body = $content
+    $body = $content
   }
 
-  concat::fragment{"motd_fragment_$name":
-     target  => $motd::params::motd,
-     content => "    -- $body\n"
+  concat::fragment{"motd_fragment_${name}":
+    target  => '/etc/motd',
+    content => "    -- ${body}\n"
   }
 }
 
