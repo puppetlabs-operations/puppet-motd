@@ -1,7 +1,7 @@
-# Ripped from - https://github.com/ripienaar/puppet-concat
+# Class: motd
 #
-
-# class to setup basic motd, include on all nodes
+# Borrowed from https://github.com/ripienaar/puppet-concat
+#
 class motd {
   include concat::setup
 
@@ -12,7 +12,7 @@ class motd {
 
   concat::fragment{ 'motd_header':
     target  => '/etc/motd',
-    content => template( 'motd/motd.erb' ),
+    content => template('motd/motd.erb'),
     order   => 02,
   }
 

@@ -1,5 +1,11 @@
-# used by other modules to register themselves in the motd
-define motd::register($content=undef, $order=10) {
+# Define: motd::register
+#
+# Add a message to the MOTD
+#
+define motd::register(
+  $content=undef,
+  $order=10
+) {
   include motd
 
   if $content == undef {
@@ -13,4 +19,3 @@ define motd::register($content=undef, $order=10) {
     content => "    -- ${body}\n"
   }
 }
-
