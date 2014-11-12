@@ -5,10 +5,9 @@ __________                            __    .____          ___.
  |____|   |____/|   __/|   __/ \___  >__|   |_______ (____  /___  /____  >
                 |__|   |__|        \/               \/    \/    \/     \/
 
-(<%= @fqdn %>) : (<%= @ipaddress %>) : <%= @whereami %>
-<%= @operatingsystem %> <%= @operatingsystemrelease %><% if has_variable?('lsbdistcodename') then %>/<%= @lsbdistcodename + ' '%><% end %> <%= @architecture %>
-
-<% if has_variable?('processor0') then -%>Processor: <%= @processor0.gsub( / +/ , ' ' ) -%> <% end -%> <% if has_variable?('memorysize') then -%> Memory:    <%= @memorysize -%> <% end -%>
+(<%= @fqdn %>) : (<%= @ipaddress %>) : (<%= @whereami %>)
+<%= @operatingsystem %> <%= @operatingsystemrelease %><% if has_variable?('lsbdistcodename') then %>/<%= @lsbdistcodename %><% end %> <%= @architecture %>
+<% if has_variable?('processor0') then -%>Processor: <%= @processor0.gsub( / +/ , ' ' ) -%> <% end -%> <% if has_variable?('memorysize') then -%> Memory: <%= @memorysize -%> <% end %>
 
        Puppet: <%= @puppetversion %> in <%= @environment %>
        Facter: <%= @facterversion %>
