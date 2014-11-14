@@ -2,9 +2,9 @@
 #
 # Add a message to the MOTD
 #
-define motd::register(
-  $content=undef,
-  $order=10
+define motd::register (
+  $content = undef,
+  $order   = 10,
 ) {
   include motd
 
@@ -14,8 +14,8 @@ define motd::register(
     $body = $content
   }
 
-  concat::fragment{"motd_fragment_${name}":
+  concat::fragment { "motd_fragment_${name}":
     target  => '/etc/motd',
-    content => "    -- ${body}\n"
+    content => "    -- ${body}\n",
   }
 }
