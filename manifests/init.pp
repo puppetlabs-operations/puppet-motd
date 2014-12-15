@@ -31,4 +31,18 @@ class motd {
     owner  => 'root',
     mode   => '0644',
   }
+
+  case $::operatingsystem {
+    'CentOS': {
+      augeas { 'enable_motd_postlogin':
+        context => '/files/etc/pam.d/postlogin',
+        changes => [
+          'ins 1000000 after *[last()]',
+          'set 1000000/type session',
+          'set 1000000/control optional',
+          'set 1000000/module pam_motd.so',
+        ]
+      }
+    }
+  }
 }
