@@ -44,6 +44,14 @@ class motd {
         ],
         onlyif  => "match *[module = 'pam_motd.so'] size == 0",
       }
+
+      augeas { 'remove_duplicate_motd_postlogin':
+        context => '/files/etc/pam.d/postlogin',
+        changes => [
+          'rm *[last()]',
+        ],
+        onlyif  => "match *[module = 'pam_motd.so'] size > 1",
+      }
     }
   }
 }
