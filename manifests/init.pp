@@ -41,7 +41,8 @@ class motd {
           'set 1000000/type session',
           'set 1000000/control optional',
           'set 1000000/module pam_motd.so',
-        ]
+        ],
+        onlyif  => "match *[module = 'pam_motd.so'] size == 0",
       }
     }
   }
