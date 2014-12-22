@@ -13,7 +13,7 @@ class motd {
   concat::fragment{ 'motd_header':
     target  => '/etc/motd',
     content => template('motd/motd.erb'),
-    order   => 02,
+    order   => '02',
   }
 
   # local users on the machine can append to motd by just creating
@@ -21,7 +21,7 @@ class motd {
   concat::fragment{ 'motd_local':
     ensure  => '/etc/motd.local',
     target  => '/etc/motd',
-    order   => 15,
+    order   => '15',
   }
 
   # Place our custom /etc/issue

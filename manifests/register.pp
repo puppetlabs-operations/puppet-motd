@@ -4,7 +4,7 @@
 #
 define motd::register (
   $content = undef,
-  $order   = 10,
+  $order   = '20',
 ) {
   include motd
 
@@ -17,5 +17,6 @@ define motd::register (
   concat::fragment { "motd_fragment_${name}":
     target  => '/etc/motd',
     content => "    -- ${body}\n",
+    order   => $order,
   }
 }
