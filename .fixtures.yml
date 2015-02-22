@@ -1,0 +1,8 @@
+fixtures:
+  repositories:
+    stdlib: "git://github.com/puppetlabs/puppetlabs-stdlib.git"
+    concat: "git://github.com/puppetlabs/puppetlabs-concat.git"
+    pe_gem: "git://github.com/puppetlabs/puppetlabs-pe_gem.git"
+  symlinks:
+    motd: "#{source_dir}"
+

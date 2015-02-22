@@ -2,26 +2,36 @@
 #
 # Borrowed from https://github.com/ripienaar/puppet-concat
 #
-class motd {
-  include concat::setup
+class motd (
+  $enable_ascii_art = false,
+  $ascii_art_text = $::fqdn,
+  $ascii_art_font = 'graffiti',
+  $manage_gem  = true,
+  $motd_file   = '/etc/motd',
+  $fact_list   = [$fqdn, $ipaddress, $whereami]
+  ){
+  if str2bool($manage_gem) and str2bool($enable_ascii_art) {
+    $gem_provider = str2bool($::is_pe) ? {
+      true    => 'pe_gem',
+      false   => 'gem',
+      default => 'gem',
+    }
+    package { 'artii':
+      ensure   => present,
+      provider => $gem_provider,
+      before   => Concat[$motd_file],
+    }
+  }
 
-  concat{ '/etc/motd':
+  concat { $motd_file:
     owner => 'root',
     mode  => '0644',
   }
 
-  concat::fragment{ 'motd_header':
-    target  => '/etc/motd',
+  concat::fragment { 'motd_header':
+    target  => $motd_file,
     content => template('motd/motd.erb'),
     order   => '02',
-  }
-
-  # local users on the machine can append to motd by just creating
-  # /etc/motd.local
-  concat::fragment{ 'motd_local':
-    ensure  => '/etc/motd.local',
-    target  => '/etc/motd',
-    order   => '15',
   }
 
   # Place our custom /etc/issue
