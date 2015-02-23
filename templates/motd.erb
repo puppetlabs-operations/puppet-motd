@@ -1,11 +1,8 @@
-__________                            __    .____          ___.
-\______   \__ ________ ______   _____/  |_  |    |   _____ \_ |__   ______
- |     ___/  |  \____ \\____ \_/ __ \   __\ |    |   \__  \ | __ \ /  ___/
- |    |   |  |  /  |_> >  |_> >  ___/|  |   |    |___ / __ \| \_\ \\___ \
- |____|   |____/|   __/|   __/ \___  >__|   |_______ (____  /___  /____  >
-                |__|   |__|        \/               \/    \/    \/     \/
+<% if @enable_ascii_art!= false then -%>
+<%= begin; require 'artii'; a = Artii::Base.new :font => @ascii_art_font; a.asciify(@ascii_art_text); rescue LoadError; "artii gem not installed on puppetmaster; cannot generate ascii art"; end %>
+<% end -%>
 
-(<%= @fqdn %>) : (<%= @ipaddress %>) : (<%= @whereami %>)
+<%= @fact_list.map {|a| "(#{a})"}.join(' : ') %>
 <%= @operatingsystem %> <%= @operatingsystemrelease %><% if has_variable?('lsbdistcodename') then %>/<%= @lsbdistcodename %><% end %> <%= @architecture %>
 <% if has_variable?('processor0') then -%>Processor: <%= @processor0.gsub( / +/ , ' ' ) -%> <% end -%> <% if has_variable?('memorysize') then -%> Memory: <%= @memorysize -%> <% end %>
 

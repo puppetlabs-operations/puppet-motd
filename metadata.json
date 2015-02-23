@@ -1,0 +1,58 @@
+{
+  "name": "ploperations-motd",
+  "version": "0.1.0",
+  "source": "https://github.com/puppetlabs-operations/puppet-motd",
+  "author": "Puppet Labs Operations",
+  "license": "Apache-2.0",
+  "summary": "Manage MOTD file",
+  "description": "Generate a useful MOTD with an attractive banner",
+  "project_page": "https://github.com/puppetlabs-operations/puppet-motd",
+  "dependencies": [
+    {
+      "name": "puppetlabs/concat",
+      "version_requirement": ">= 1.0.0 <2.0.0"
+    }
+  ],
+  "operatingsystem_support": [
+    {
+      "operatingsystem": "Debian",
+      "operatingsystemrelease": [
+        "6",
+        "7"
+      ]
+    },
+    {
+      "operatingsystem": "Ubuntu",
+      "operatingsystemrelease": [
+        "10.04",
+        "12.04",
+        "14.04"
+      ]
+    },
+    {
+      "operatingsystem": "RedHat",
+      "operatingsystemrelease": [
+        "5",
+        "6",
+        "7"
+      ]
+    },
+    {
+      "operatingsystem": "CentOS",
+      "operatingsystemrelease": [
+        "6",
+        "7"
+      ]
+    }
+  ],
+  "requirements": [
+    {
+      "name": "pe",
+      "version_requirement": "3.x"
+    },
+    {
+      "name": "puppet",
+      "version_requirement": "3.x"
+    }
+  ]
+}
